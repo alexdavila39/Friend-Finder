@@ -11,12 +11,12 @@ module.exports = function (app) {
         var bestMatch = {
             name: "",
             photo: "",
-            friendDiff: 1000,
+            friendDiff: 1000
         };
         //this is to Parse the results of the users result to POST.
         var userData = req.body;
         var userScores = userData.scores;
-
+        console.log(userData)
         console.log(userScores);
         //this variable is created to calculate the difference between the user's scores & the scores 
         //of each user saved in the database.
@@ -29,7 +29,7 @@ module.exports = function (app) {
 
 
             //Then we loop through all  the scores of each friend
-            for (var J = 0; i < friends[i].scores[j]; i++) {
+            for (var j = 0; i < friends[i].scores[j]; i++) {
 
                 //here we calculate the difference between the scores and sum then into the totalDifference
                 totalDifference += Math.abs(parseInt(userScores[j]) - parseInt(friends[i].scores[j]));

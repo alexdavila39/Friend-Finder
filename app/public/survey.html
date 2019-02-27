@@ -34,7 +34,7 @@
         <input type=text name="" id="name" class="form-control" required>
 
         <h4>Link to Photo Image (Required)</h4>
-        <input type=text name="" id="Photo" class="form-control" required>
+        <input type=text name="" id="photo" class="form-control" required>
 
         <hr>
 
@@ -158,7 +158,7 @@
 
         <footer class="footer">
             <div class="container">
-                <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/alexdavila39/Friend-Finder">GitHub
+                <p><a href="/api/friends/">API Friends List</a> | <a href="https://github.com/alexdavila39/Friend-Finder">GitHub
                         Repo</a></p>
             </div>
         </footer>
@@ -178,25 +178,25 @@
     <script type="text/javascript">
 
         //captures the form inputs
-        $("submit").on("click", function () {
+        $("#submit").on("click", function (e) {
             //form validation
             function validate() {
                 var isValid = true;
-                $(".form-controll").each(function () {
+                $(".form-control").each(function () {
                     if ($(this).val() === "") {
                         isValid = false;
                     }
                 });
                 return isValid;
             }
-
+            console.log(e)
             //if all required fields are filled
             if (validate()) {
                  //create an object for users data
                 var userData ={
                     name: $("#name").val(),
                     photo: $("#photo").val(),
-                    score:[
+                    scores:[
                         $("#q1").val(),
                         $("#q2").val(),
                         $("#q3").val(),
@@ -208,13 +208,13 @@
                         $("#q9").val(),
                         $("#q10").val()
                     ]
+                    
                 };
-
                 var currentURL = window.location.origin;
 
                 //ajax post the data to friendsAPI
-
-            $.post(currentURL + "/api/friends", userData, function(){
+                console.log(currentURL + "/api/friends");
+            $.post(currentURL + "/api/friends", userData, function(data){
 
 alert("working!");
 
