@@ -167,11 +167,30 @@
 
     </div>
 
+    <div id="resultModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h3 class="modal-title">Meet you new friend</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h2 id="matchName"></h2>
+              <img id="matchImg" src="" alt="" width="100%">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
 
-
-
+      <img id="image-validator" width="5px" style="position:fixed;left:-100%"> 
 
 
 
@@ -190,6 +209,11 @@
                 return isValid;
             }
             console.log(e)
+            $("#image-validator").off("load error");
+            $("#image-validator").on("load error", function(res){
+                if(res.type=="error"){
+                  return  alert("Invalid Image!");      
+                }
             //if all required fields are filled
             if (validate()) {
                  //create an object for users data
@@ -215,19 +239,22 @@
                 //ajax post the data to friendsAPI
                 console.log(currentURL + "/api/friends");
             $.post(currentURL + "/api/friends", userData, function(data){
-
-alert("working!");
-
-            })
-                
+                $("#matchName").text(data.name);
+                $("#matchImg").attr("src", data.photo);
+                $("#resultModal").modal("toggle");
+            });
             }
-        })
-
-
-
-
+            else{
+                alert("Please fill out all fields before submitting!");
+            }
+            return false;
+        });
+        $("#image-validator").attr("src",$("#photo").val())
+    });
 
     </script>
+
+   
 </body>
 
 </html>

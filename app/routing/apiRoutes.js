@@ -33,15 +33,15 @@ module.exports = function (app) {
 
                 //here we calculate the difference between the scores and sum then into the totalDifference
                 totalDifference += Math.abs(parseInt(userScores[j]) - parseInt(friends[i].scores[j]));
+            }
 
-                //If the sum of difference is less than the difference of the current "best match"
-                if (totalDifference <= bestMatch.friendDiff) {
+            //If the sum of difference is less than the difference of the current "best match"
+            if (totalDifference <= bestMatch.friendDiff) {
 
-                    //Reset the bestMatch to be the new friend.
-                    bestMatch.name = friends[i].name;
-                    bestMatch.photo = friends[i].photo;
-                    bestMatch.friendDiff = totalDifference;
-                }
+                //Reset the bestMatch to be the new friend.
+                bestMatch.name = friends[i].name;
+                bestMatch.photo = friends[i].photo;
+                bestMatch.friendDiff = totalDifference;
             }
         }
 
